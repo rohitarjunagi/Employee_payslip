@@ -155,9 +155,13 @@ function computeIncomeTax(annual_salary) {
     return (((54547 + (annual_salary - 180000) * 0.45) / 12).toFixed(0));
   }
 }
+
+//Start the server on a the specified port
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
+});
 
+//print stack trace for uncaught exceptions
 process.on('uncaughtException', function(err) {
   console.error('#--------- uncaughtException --------#');
   console.error(err);
