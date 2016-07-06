@@ -18,6 +18,30 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
+
+/**
+Function checks for obvious error conditions in the request body
+*/
+function validateRequest() {
+  return function(req, res, next) {
+    var contype = req.headers['content-type'];
+    if (!contype || contype.indexOf('application/json') !== 0) {
+      return res.status(400).send('Only Json content-types are processed for now!');
+    }
+    if (_.isEmpty(req.body)) {
+      return res.status(400).send('Request Body is empty!');
+    }
+    //check if employee_data exists
+    if (!req.body.employee_data) {
+      return res.status(400).send('Request Body does not contain the employee_data!');
+    }
+    //check if employee_data length is zero
+    if (req.body.employee_data.length === 0) {
+      return res.status(400).send('employee_data Length is 0!!');
+    }
+    next();
+  };
+}
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
