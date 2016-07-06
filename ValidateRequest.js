@@ -93,6 +93,9 @@ function checkSuperRate(employee) {
     return false;
   }
   var super_rate = employee.super_rate.replace(new RegExp('%', 'g'), "");
+  if (super_rate.match(/[a-z]/i)) {
+    return false;
+  }
   if (super_rate < 0 || super_rate > 50) {
     return false
   }
