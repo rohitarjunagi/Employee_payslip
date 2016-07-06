@@ -1,13 +1,21 @@
-var _ = require('lodash');
+/**
+This module makes use of the ValidateRequest module
+to validate the employee data and then compute the
+payslip and return the payslip in the requested format
+*/
 var util = require('util');
 var validateRequest = require('./ValidateRequest');
 
 exports = module.exports = ProcessEmployeeData;
-
+//Empty constructor
 function ProcessEmployeeData() {
 
 };
 
+/**
+This function takes the request object as input and validates the
+request object before computing the payslip
+*/
 ProcessEmployeeData.prototype.processResponse = function(req, cb) {
   var validateEmployees = new validateRequest();
   validateEmployees.validateRequestBody(req, function(err) {
