@@ -59,4 +59,8 @@ function validateRequest() {
 }
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
+
+process.on('uncaughtException', function(err) {
+  console.error('#--------- uncaughtException --------#');
+  console.error(err);
 });
