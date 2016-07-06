@@ -57,6 +57,26 @@ function validateRequest() {
     next();
   };
 }
+
+function postEmployeeData() {
+  return function(req, res, next) {
+    var return_data_array = [];
+    var return_data = {};
+    var reqBody = req.body.employee_data;
+    for (var i = 0; i < reqBody.length; i++) {
+      var employee = {};
+      employee.name = reqBody[i].last_name + ' ' + reqBody[i].first_name;
+      employee.pay_period = reqBody[i].pay_period;
+      employee.gross_income = (reqBody[i].annual_salary / 12).toFixed(0);
+      employee.income_tax = computeIncomeTax(reqBody[i].annual_salary);
+      employee.net_income = employee.gross_income - employee.income_tax;
+      employee.super = computeSuper(employee.gross_income, reqBody[i].super_rate);
+      return_data_array.push(employee);
+    }
+    return_data.response = return_data_array;
+    res.status(201).send(return_data);
+  }
+}
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 
