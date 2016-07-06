@@ -36,24 +36,13 @@ in the requested format
 */
 function postEmployeeData() {
   return function(req, res, next) {
-    var validatePostData = new validateRequest();
     var processEmployeePostData = new processEmployeeData();
-    validatePostData.validateRequestBody(req, function(err) {
-      if (err) {
-        return res.status(400).send(err.message);
-      }
-      validatePostData.validateRequestData(req.body.employee_data, function(err) {
-        if (err) {
-          return res.status(400).send(err.message);
-        }
-        processEmployeePostData.processResponse(req.body, function(err, response) {
+        processEmployeePostData.processResponse(req, function(err, response) {
           if (err) {
             return res.status(400).send(err.message);
           }
           res.status(201).send(response);
         });
-      });
-    });
   }
 }
 

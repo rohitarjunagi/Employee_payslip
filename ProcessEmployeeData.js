@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var util = require('util');
+var validateRequest = require('./ValidateRequest');
 
 exports = module.exports = ProcessEmployeeData;
 
@@ -7,27 +8,42 @@ function ProcessEmployeeData() {
 
 };
 
-ProcessEmployeeData.prototype.processResponse = function(employees, cb) {
-  var return_data_array = [];
-  var return_data = {};
-  var employeesData = employees.employee_data;
-  for (var i = 0; i < employeesData.length; i++) {
-    var employee = {};
-    var super_rate;
-    employee.name = employeesData[i].last_name + ' ' + employeesData[i].first_name;
-    employee.pay_period = employeesData[i].payment_start_date;
-    employee.gross_income = (employeesData[i].annual_salary / 12).toFixed(0);
-    employee.income_tax = computeIncomeTax(employeesData[i].annual_salary);
-    employee.net_income = employee.gross_income - employee.income_tax;
-    super_rate = computeSuper(employee.gross_income, employeesData[i].super_rate);
-    if (super_rate === 'NaN' || super_rate == null) {
-      return cb(new Error('Invalid super rate'));
+ProcessEmployeeData.prototype.processResponse = function(req, cb) {
+  var validateEmployees = new validateRequest();
+  validateEmployees.validateRequestBody(req, function(err) {
+    if (err) {
+      return cb(err);
     }
-    employee.super = super_rate;
-    return_data_array.push(employee);
-  }
-  return_data.response = return_data_array;
-  cb(null, return_data);
+    validateEmployees.validateRequestData(req.body.employee_data, function(err) {
+      if (err) {
+        return cb(err);
+      }
+      var return_data_array = [];
+      var return_data = {};
+      var employeesData = req.body.employee_data;
+      for (var i = 0; i < employeesData.length; i++) {
+        var employee = {};
+        var super_rate;
+        employee.name = employeesData[i].last_name + ' ' + employeesData[i].first_name;
+        employee.pay_period = employeesData[i].payment_start_date;
+        employee.gross_income = (employeesData[i].annual_salary / 12).toFixed(0);
+        employee.income_tax = computeIncomeTax(employeesData[i].annual_salary);
+        employee.net_income = employee.gross_income - employee.income_tax;
+        super_rate = computeSuper(employee.gross_income, employeesData[i].super_rate);
+        /*special condition to check for NaN if the user provided the super
+        rate as '10%%' or 'asdsf'
+        */
+        if (super_rate === 'NaN' || super_rate == null) {
+          return cb(new Error('Incorrect Super Rate in Employee No: ' + i));
+        }
+        employee.super = super_rate;
+        return_data_array.push(employee);
+      }
+      return_data.response = return_data_array;
+      cb(null, return_data);
+
+    });
+  });
 }
 
 /**
