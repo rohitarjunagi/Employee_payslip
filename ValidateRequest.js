@@ -48,12 +48,12 @@ ValidateRequest.prototype.validateRequestData = function(employee_data, cb) {
   for (var i = 0; i < employeeData.length; i++) {
     var err;
     //if request body has incorrect last name, return error
-    if (!employeeData[i].hasOwnProperty('last_name') || typeof employeeData[i].last_name !== 'string') {
+    if (!employeeData[i].hasOwnProperty('last_name') || typeof employeeData[i].last_name !== 'string' || !employeeData[i].last_name.match(/^[a-z]/i)) {
       err = new Error('Incorrect Last Name in Employee No: ' + i);
       return cb(err);
     }
     //if request body has incorrect first name, return error
-    if (!employeeData[i].hasOwnProperty('first_name') || typeof employeeData[i].first_name !== 'string') {
+    if (!employeeData[i].hasOwnProperty('first_name') || typeof employeeData[i].first_name !== 'string' || !employeeData[i].first_name.match(/^[a-z]/i)) {
       err = new Error('Incorrect First Name in Employee No: ' + i);
       return cb(err);
     }
