@@ -57,6 +57,33 @@ function validateRequest() {
     next();
   };
 }
+/**
+Function checks if the values passed in the request body are sane
+*/
+function sanitizeRequest() {
+  return function(req, res, next) {
+    var reqBody = req.body.employee_data;
+    for (var i = 0; i < reqBody.length; i++) {
+      //if request body has incorrect last name, return error
+      if (!reqBody[i].hasOwnProperty('last_name') || typeof reqBody[i].last_name !== 'string') {
+        return res.status(400).send('Incorrect Last Name in Employee No: ' + i);
+      }
+      //if request body has incorrect first name, return error
+      if (!reqBody[i].hasOwnProperty('first_name') || typeof reqBody[i].first_name !== 'string') {
+        return res.status(400).send('Incorrect First Name in Employee No: ' + i);
+      }
+      //if request body has incorrect salary value, return error
+      if (!checkAnnualSalary(reqBody[i])) {
+        return res.status(400).send('Incorrect Annual Salary in Employee No: ' + i);
+      }
+      //if request body has incorrect super rate, return error
+      if (!checkSuperRate(reqBody[i])) {
+        return res.status(400).send('Incorrect Super Rate in Employee No: ' + i);
+      }
+    }
+    next();
+  }
+}
 
 function postEmployeeData() {
   return function(req, res, next) {
