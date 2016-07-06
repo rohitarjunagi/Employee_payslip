@@ -16,19 +16,19 @@ function ProcessEmployeeData() {
 This function takes the request object as input and validates the
 request object before computing the payslip
 */
-ProcessEmployeeData.prototype.processResponse = function(req, cb) {
+ProcessEmployeeData.prototype.processResponse = function(req, content_type, cb) {
   var validateEmployees = new validateRequest();
-  validateEmployees.validateRequestBody(req, function(err) {
+  validateEmployees.validateRequestBody(req, content_type, function(err) {
     if (err) {
       return cb(err);
     }
-    validateEmployees.validateRequestData(req.body.employee_data, function(err) {
+    validateEmployees.validateRequestData(req.employee_data, function(err) {
       if (err) {
         return cb(err);
       }
       var return_data_array = [];
       var return_data = {};
-      var employeesData = req.body.employee_data;
+      var employeesData = req.employee_data;
       for (var i = 0; i < employeesData.length; i++) {
         var employee = {};
         var super_rate;

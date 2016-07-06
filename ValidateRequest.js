@@ -14,28 +14,27 @@ function ValidateRequest() {
 /**
 This function validates the request body
 */
-ValidateRequest.prototype.validateRequestBody = function(req, cb) {
-  var contype = req.headers['content-type'];
+ValidateRequest.prototype.validateRequestBody = function(req, content_type, cb) {
   var err;
   //check the payload type of the incoming data. If not json, return error
-  if (!contype || contype.indexOf('application/json') !== 0) {
+  if (!content_type || content_type !== 'application/json') {
     err = new Error('Only Json content-types are processed for now!');
     return cb(err);
   }
   //check if request body is empty
-  if (_.isEmpty(req.body)) {
+  if (_.isEmpty(req)) {
     err = new Error('Request Body is empty!');
     return cb(err);
   }
   //check if employee_data exists
-  if (!req.body.employee_data) {
+  if (!req.employee_data) {
 
     err = new Error('Request Body does not contain the employee_data!');
     return cb(err);
   }
   //check if employee_data length is zero
-  if (req.body.employee_data.length === 0) {
-    err = new Error('employee_data Length is 0!!');
+  if (req.employee_data.length === 0) {
+    err = new Error('Employee_data Length is 0!');
     return cb(err);
   }
   cb(null);
