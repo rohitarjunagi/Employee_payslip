@@ -117,10 +117,10 @@ describe('Test the ValidateRequest library', function() {
       });
     });
 
-    it('should produce an error for incorrect last name', function(done) {
+    it('should produce if last name is not a type of string', function(done) {
       var request = [{
         "first_name": "David",
-        "last_name": 12345,
+        "last_name": 8370,
         "annual_salary": 2340,
         "super_rate": "10%",
         "payment_start_date": "01 March – 31 March"
@@ -128,8 +128,26 @@ describe('Test the ValidateRequest library', function() {
       validateEmployees.validateRequestData(request, function(err) {
         if (err) {
           assert.equal(err.message, 'Incorrect Last Name in Employee No: 0');
-          done();
+          return done();
         }
+        done();
+      });
+    });
+
+    it('should produce an error if last name does not have first character as a letter', function(done) {
+      var request = [{
+        "first_name": "David",
+        "last_name": "1Rudd",
+        "annual_salary":2340,
+        "super_rate": "10%",
+        "payment_start_date": "01 March – 31 March"
+      }];
+      validateEmployees.validateRequestData(request, function(err) {
+        if (err) {
+          assert.equal(err.message, 'Incorrect Last Name in Employee No: 0');
+          return done();
+        }
+        done();
       });
     });
 
@@ -144,8 +162,9 @@ describe('Test the ValidateRequest library', function() {
       validateEmployees.validateRequestData(request, function(err) {
         if (err) {
           assert.equal(err.message, 'Incorrect Super Rate in Employee No: 0');
-          done();
+          return done();
         }
+        done();
       });
     });
 
@@ -160,8 +179,9 @@ describe('Test the ValidateRequest library', function() {
       validateEmployees.validateRequestData(request, function(err) {
         if (err) {
           assert.equal(err.message, 'Incorrect Super Rate in Employee No: 0');
-          done();
+          return done();
         }
+        done();
       });
     });
 
@@ -176,8 +196,26 @@ describe('Test the ValidateRequest library', function() {
       validateEmployees.validateRequestData(request, function(err) {
         if (err) {
           assert.equal(err.message, 'Incorrect Super Rate in Employee No: 0');
-          done();
+          return done();
         }
+        done();
+      });
+    });
+
+    it('should produce an error if super rate has an alphabet %', function(done) {
+      var request = [{
+        "first_name": "David",
+        "last_name": "Rudd",
+        "annual_salary": 23340,
+        "super_rate": "abcde%%",
+        "payment_start_date": "01 March – 31 March"
+      }];
+      validateEmployees.validateRequestData(request, function(err) {
+        if (err) {
+          assert.equal(err.message, 'Incorrect Super Rate in Employee No: 0');
+          return done();
+        }
+        done();
       });
     });
 
@@ -192,8 +230,9 @@ describe('Test the ValidateRequest library', function() {
       validateEmployees.validateRequestData(request, function(err) {
         if (err) {
           assert.equal(err.message, 'Incorrect Annual Salary in Employee No: 0');
-          done();
+          return done();
         }
+        done();
       });
     });
   });
