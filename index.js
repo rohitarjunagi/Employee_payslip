@@ -131,6 +131,14 @@ function postEmployeeData() {
     res.status(201).send(return_data);
   }
 }
+/**
+Function to compute the Super Annuation for a given gross income
+*/
+function computeSuper(gross_income, rate) {
+  var super_rate = rate.replace(/[\%]/, '');
+  return (((gross_income * super_rate) / 100).toFixed(0));
+}
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 
