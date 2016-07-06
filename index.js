@@ -139,6 +139,22 @@ function computeSuper(gross_income, rate) {
   return (((gross_income * super_rate) / 100).toFixed(0));
 }
 
+/**
+Function to compute the income tax for a given annual salary
+*/
+function computeIncomeTax(annual_salary) {
+  if (annual_salary <= 18200) {
+    return 0;
+  } else if (annual_salary >= 18201 && annual_salary <= 37000) {
+    return ((((annual_salary - 18200) * 0.19) / 12).toFixed(0));
+  } else if (annual_salary >= 37001 && annual_salary <= 80000) {
+    return (((3572 + (annual_salary - 37000) * 0.325) / 12).toFixed(0));
+  } else if (annual_salary >= 80001 && annual_salary <= 180000) {
+    return (((17547 + (annual_salary - 80000) * 0.37) / 12).toFixed(0));
+  } else if (annual_salary >= 180001) {
+    return (((54547 + (annual_salary - 180000) * 0.45) / 12).toFixed(0));
+  }
+}
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 
