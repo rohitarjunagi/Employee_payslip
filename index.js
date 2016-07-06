@@ -2,6 +2,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var _ = require('lodash');
+var validateRequest = require('./ValidateRequest');
+var processEmployeeData = require('./ProcessEmployeeData');
 //initialize express
 var app = express();
 
@@ -114,6 +116,8 @@ in the requested format
 */
 function postEmployeeData() {
   return function(req, res, next) {
+    var validatePostData = new validateRequest();
+    var processEmployeePostData = new processEmployeeData();
     var return_data_array = [];
     var return_data = {};
     var reqBody = req.body.employee_data;
