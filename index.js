@@ -20,6 +20,10 @@ app.get('/', function(request, response) {
 
 
 app.post('/postEmployeeData', sanitizeRequest(), postEmployeeData());
+
+//use the method to validate request body
+app.use(validateRequest());
+
 /**
 Function checks for obvious error conditions in the request body
 */
