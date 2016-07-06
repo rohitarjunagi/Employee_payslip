@@ -37,7 +37,8 @@ in the requested format
 function postEmployeeData() {
   return function(req, res, next) {
     var processEmployeePostData = new processEmployeeData();
-        processEmployeePostData.processResponse(req, function(err, response) {
+    var conType = req.headers['content-type'];
+        processEmployeePostData.processResponse(req.body, conType, function(err, response) {
           if (err) {
             return res.status(400).send(err.message);
           }
