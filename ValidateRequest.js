@@ -1,18 +1,28 @@
-var _ = require('lodash');
+/**
+This module is used to check for the validity of the request body object
+as well as the validity of the employee details values
+*/
 
+var _ = require('lodash');
 exports = module.exports = ValidateRequest;
 
+//empty constructor
 function ValidateRequest() {
 
 };
 
+/**
+This function validates the request body
+*/
 ValidateRequest.prototype.validateRequestBody = function(req, cb) {
   var contype = req.headers['content-type'];
   var err;
+  //check the payload type of the incoming data. If not json, return error
   if (!contype || contype.indexOf('application/json') !== 0) {
     err = new Error('Only Json content-types are processed for now!');
     return cb(err);
   }
+  //check if request body is empty
   if (_.isEmpty(req.body)) {
     err = new Error('Request Body is empty!');
     return cb(err);
@@ -31,6 +41,9 @@ ValidateRequest.prototype.validateRequestBody = function(req, cb) {
   cb(null);
 };
 
+/**
+This function checks if the employee data has sane values.
+*/
 ValidateRequest.prototype.validateRequestData = function(employee_data, cb) {
   var employeeData = employee_data;
   for (var i = 0; i < employeeData.length; i++) {
@@ -58,7 +71,6 @@ ValidateRequest.prototype.validateRequestData = function(employee_data, cb) {
 
   }
   cb(null);
-
 }
 
 /**
