@@ -2,6 +2,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var _ = require('lodash');
+//initialize express
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -107,6 +108,10 @@ function checkSuperRate(employee) {
   }
   return true;
 }
+/**
+Function to take in the posted data and send back data to client
+in the requested format
+*/
 function postEmployeeData() {
   return function(req, res, next) {
     var return_data_array = [];
