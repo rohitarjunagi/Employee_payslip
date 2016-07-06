@@ -78,7 +78,9 @@ function checkSuperRate(employee) {
   if (!employee.hasOwnProperty('super_rate') || typeof employee.super_rate !== 'string') {
     return false;
   }
-  var super_rate = employee.super_rate.replace(/[\%]/, '');
+  if (employee.super_rate.indexOf('%')=== -1) {
+    return false;
+  }
   var super_rate = employee.super_rate.replace(new RegExp('%', 'g'), "");
   if (super_rate < 0 || super_rate > 50) {
     return false
