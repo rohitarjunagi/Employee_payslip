@@ -19,6 +19,7 @@ app.get('/', function(request, response) {
 });
 
 
+app.post('/postEmployeeData', sanitizeRequest(), postEmployeeData());
 /**
 Function checks for obvious error conditions in the request body
 */
