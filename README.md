@@ -4,8 +4,6 @@ A barebones Node.js app cloned from  https://devcenter.heroku.com/getting-starte
 
 ## Running Locally
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
-
 ```sh
 $ git clone https://github.com/rohitarjunagi/Employee_payslip.git # or clone your own fork
 $ cd Employee_payslip
@@ -28,7 +26,7 @@ To use the app, post data to the app on this url: (http://localhost:5000/postEmp
 {
   "employee_data" : [
     { "first_name" : "David",
-  	  "last_name" : "Rudd",
+      "last_name" : "Rudd",
       "annual_salary" : 24000,
       "super_rate" : "15%",
       "payment_start_date" : "01 March – 31 March"
