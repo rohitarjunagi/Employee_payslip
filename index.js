@@ -24,6 +24,16 @@ app.post('/postEmployeeData', sanitizeRequest(), postEmployeeData());
 //use the method to validate request body
 app.use(validateRequest());
 
+//define the errorHandler
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  var err = {
+    "error": "Internal Server Error"
+  }
+  res.status(500).send(err);
+  next();
+});
+
 /**
 Function checks for obvious error conditions in the request body
 */
