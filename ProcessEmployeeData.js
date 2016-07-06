@@ -38,12 +38,6 @@ ProcessEmployeeData.prototype.processResponse = function(req, content_type, cb) 
         employee.income_tax = computeIncomeTax(employeesData[i].annual_salary);
         employee.net_income = employee.gross_income - employee.income_tax;
         super_rate = computeSuper(employee.gross_income, employeesData[i].super_rate);
-        /*special condition to check for NaN if the user provided the super
-        rate as '10%%' or 'asdsf'
-        */
-        if (super_rate === 'NaN' || super_rate == null) {
-          return cb(new Error('Incorrect Super Rate in Employee No: ' + i));
-        }
         employee.super = super_rate;
         return_data_array.push(employee);
       }
@@ -58,7 +52,7 @@ ProcessEmployeeData.prototype.processResponse = function(req, content_type, cb) 
 Function to compute the Super Annuation for a given gross income
 */
 function computeSuper(gross_income, rate) {
-  var super_rate = rate.replace(/[\*%]/, '');
+  var super_rate = rate.replace(new RegExp('%', 'g'), "");
   return (((gross_income * super_rate) / 100).toFixed(0));
 }
 
