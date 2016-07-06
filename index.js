@@ -84,7 +84,29 @@ function sanitizeRequest() {
     next();
   }
 }
+/**
+Function to check if annual salary exists and is a valid number
+*/
+function checkAnnualSalary(employee) {
+  if (!employee.hasOwnProperty('annual_salary') || typeof employee.annual_salary !== 'number' || employee.annual_salary < 0) {
+    return false;
+  }
+  return true;
+}
 
+/**
+Function to check if super rate exists and is valid
+*/
+function checkSuperRate(employee) {
+  if (!employee.hasOwnProperty('super_rate') || typeof employee.super_rate !== 'string') {
+    return false;
+  }
+  var super_rate = employee.super_rate.replace(/[\%]/, '');
+  if (super_rate < 0 || super_rate > 50) {
+    return false
+  }
+  return true;
+}
 function postEmployeeData() {
   return function(req, res, next) {
     var return_data_array = [];
