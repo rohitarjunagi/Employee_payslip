@@ -1,5 +1,5 @@
 {
-  "name": "Employee Payslip",
+  "name": "Employee_payslip",
   "description": "An app that generates an employee payslip in Json format when given a certain json input ",
   "repository": "https://github.com/rohitarjunagi/Employee_payslip"
 }

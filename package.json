@@ -1,5 +1,5 @@
 {
-  "name": "Employee Payslip",
+  "name": "Employee_payslip",
   "version": "0.2.5",
   "description": "An app that generates an employee payslip in Json format when given a certain json input ",
   "engines": {
