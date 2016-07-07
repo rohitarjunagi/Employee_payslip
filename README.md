@@ -16,7 +16,9 @@ $ npm start
 $ npm test
 ```
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+## Check Build Status after Each commit
+
+[![Build Status](https://travis-ci.org/rohitarjunagi/Employee_payslip.svg?branch=master)](https://travis-ci.org/rohitarjunagi/Employee_payslip)
 
 
 ## Documentation
