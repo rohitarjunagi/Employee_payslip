@@ -48,13 +48,13 @@ ValidateRequest.prototype.validateRequestData = function(employee_data, cb) {
   for (var i = 0; i < employeeData.length; i++) {
     var err;
     //if request body has incorrect last name, return error
-    if (!employeeData[i].hasOwnProperty('last_name') || typeof employeeData[i].last_name !== 'string' || !employeeData[i].last_name.match(/^[a-z]/i)) {
-      err = new Error('Incorrect Last Name in Employee No: ' + i);
+    if (!checkFirstName(employeeData[i])) {
+      err = new Error('Incorrect First Name in Employee No: ' + i);
       return cb(err);
     }
     //if request body has incorrect first name, return error
-    if (!employeeData[i].hasOwnProperty('first_name') || typeof employeeData[i].first_name !== 'string' || !employeeData[i].first_name.match(/^[a-z]/i)) {
-      err = new Error('Incorrect First Name in Employee No: ' + i);
+    if (!checkLastName(employeeData[i])) {
+      err = new Error('Incorrect Last Name in Employee No: ' + i);
       return cb(err);
     }
     //if request body has incorrect salary value, return error
@@ -70,6 +70,26 @@ ValidateRequest.prototype.validateRequestData = function(employee_data, cb) {
 
   }
   cb(null);
+}
+
+/**
+function to check if first name is valid
+*/
+function checkFirstName(employee) {
+  if (!employee.hasOwnProperty('first_name') || typeof employee.first_name !== 'string' || !employee.first_name.match(/^[a-z]/i)) {
+    return false;
+  }
+  return true;
+}
+
+/**
+function to check if last name is valid
+*/
+function checkLastName(employee) {
+  if (!employee.hasOwnProperty('last_name') || typeof employee.last_name !== 'string' || !employee.last_name.match(/^[a-z]/i)) {
+    return false;
+  }
+  return true;
 }
 
 /**
