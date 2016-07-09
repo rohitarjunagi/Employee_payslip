@@ -15,13 +15,13 @@ describe('Test the ValidateRequest library', function() {
           "last_name": "Rudd",
           "annual_salary": 2340,
           "super_rate": "10%",
-          "payment_start_date": "01 March – 31 March"
+          "payment_start_date": "01 March - 31 March"
         }, {
           "first_name": "Chen",
           "last_name": "Ryan",
           "annual_salary": 300000,
           "super_rate": "10%",
-          "payment_start_date": "01 March – 31 March"
+          "payment_start_date": "01 March - 31 March"
         }]
       };
       validateEmployees.validateRequestBody(request, content_type, function(err) {
@@ -37,13 +37,13 @@ describe('Test the ValidateRequest library', function() {
           "last_name": "Rudd",
           "annual_salary": 2340,
           "super_rate": "10%",
-          "payment_start_date": "01 March – 31 March"
+          "payment_start_date": "01 March - 31 March"
         }, {
           "first_name": "Chen",
           "last_name": "Ryan",
           "annual_salary": 300000,
           "super_rate": "10%",
-          "payment_start_date": "01 March – 31 March"
+          "payment_start_date": "01 March - 31 March"
         }]
       };
       validateEmployees.validateRequestBody(request, content_type, function(err) {
@@ -69,13 +69,13 @@ describe('Test the ValidateRequest library', function() {
           "last_name": "Rudd",
           "annual_salary": 2340,
           "super_rate": "10%",
-          "payment_start_date": "01 March – 31 March"
+          "payment_start_date": "01 March - 31 March"
         }, {
           "first_name": "Chen",
           "last_name": "Ryan",
           "annual_salary": 300000,
           "super_rate": "10%",
-          "payment_start_date": "01 March – 31 March"
+          "payment_start_date": "01 March - 31 March"
         }]
       };
       validateEmployees.validateRequestBody(request, content_type, function(err) {
@@ -97,33 +97,34 @@ describe('Test the ValidateRequest library', function() {
   });
 
   describe('#validateRequestData()', function() {
-    it('should validate the request data', function(done) {
+    it('should validate the correct request data', function(done) {
       var request = [{
         "first_name": "David",
         "last_name": "Rudd",
         "annual_salary": 2340,
         "super_rate": "10%",
-        "payment_start_date": "01 March – 31 March"
+        "payment_start_date": "01 March - 31 March"
       }, {
         "first_name": "Chen",
         "last_name": "Ryan",
         "annual_salary": 300000,
         "super_rate": "10%",
-        "payment_start_date": "01 March – 31 March"
+        "payment_start_date": "01 March - 31 March"
       }];
       validateEmployees.validateRequestData(request, function(err) {
+        console.log(err);
         if (err) return done(err);
         done();
       });
     });
 
-    it('should produce if last name is not a type of string', function(done) {
+    it('should produce an error if last name is not a type of string', function(done) {
       var request = [{
         "first_name": "David",
         "last_name": 8370,
         "annual_salary": 2340,
         "super_rate": "10%",
-        "payment_start_date": "01 March – 31 March"
+        "payment_start_date": "01 March - 31 March"
       }];
       validateEmployees.validateRequestData(request, function(err) {
         if (err) {
@@ -140,7 +141,7 @@ describe('Test the ValidateRequest library', function() {
         "last_name": "1Rudd",
         "annual_salary":2340,
         "super_rate": "10%",
-        "payment_start_date": "01 March – 31 March"
+        "payment_start_date": "01 March - 31 March"
       }];
       validateEmployees.validateRequestData(request, function(err) {
         if (err) {
@@ -157,7 +158,7 @@ describe('Test the ValidateRequest library', function() {
         "last_name": "Rudd",
         "annual_salary": 23340,
         "super_rate": "80%",
-        "payment_start_date": "01 March – 31 March"
+        "payment_start_date": "01 March - 31 March"
       }];
       validateEmployees.validateRequestData(request, function(err) {
         if (err) {
@@ -174,7 +175,7 @@ describe('Test the ValidateRequest library', function() {
         "last_name": "Rudd",
         "annual_salary": 23340,
         "super_rate": "asdfbmbnmbnmbnmbnm",
-        "payment_start_date": "01 March – 31 March"
+        "payment_start_date": "01 March - 31 March"
       }];
       validateEmployees.validateRequestData(request, function(err) {
         if (err) {
@@ -191,7 +192,7 @@ describe('Test the ValidateRequest library', function() {
         "last_name": "Rudd",
         "annual_salary": 23340,
         "super_rate": "80",
-        "payment_start_date": "01 March – 31 March"
+        "payment_start_date": "01 March - 31 March"
       }];
       validateEmployees.validateRequestData(request, function(err) {
         if (err) {
@@ -208,7 +209,7 @@ describe('Test the ValidateRequest library', function() {
         "last_name": "Rudd",
         "annual_salary": 23340,
         "super_rate": "abcde%%",
-        "payment_start_date": "01 March – 31 March"
+        "payment_start_date": "01 March - 31 March"
       }];
       validateEmployees.validateRequestData(request, function(err) {
         if (err) {
@@ -225,7 +226,7 @@ describe('Test the ValidateRequest library', function() {
         "last_name": "Rudd",
         "annual_salary": -100,
         "super_rate": "10%",
-        "payment_start_date": "01 March – 31 March"
+        "payment_start_date": "01 March - 31 March"
       }];
       validateEmployees.validateRequestData(request, function(err) {
         if (err) {
