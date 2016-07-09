@@ -55,7 +55,7 @@ To use the app, post data to the app on this url: (http://localhost:5000/postEmp
 {  
    "response":[  
       {  
-         "name":"Rudd David",
+         "name":"David Rudd",
          "pay_period":"01 March – 31 March",
          "gross_income":"1950",
          "income_tax":"82",
@@ -63,7 +63,7 @@ To use the app, post data to the app on this url: (http://localhost:5000/postEmp
          "super":"195"
       },
       {  
-         "name":"Ryan Chen",
+         "name":"Chen Ryan",
          "pay_period":"01 March – 31 March",
          "gross_income":"25000",
          "income_tax":"9046",
