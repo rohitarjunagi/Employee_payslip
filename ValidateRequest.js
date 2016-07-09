@@ -78,6 +78,8 @@ ValidateRequest.prototype.validateRequestData = function(employee_data, cb) {
 
 /**
 function to check if first name is valid
+If function returns true, first name is valid.
+Else first name is invalid
 */
 function checkFirstName(employee) {
   if (!employee.hasOwnProperty('first_name') || typeof employee.first_name !== 'string' || !employee.first_name.match(/^[a-z]/i)) {
@@ -87,9 +89,13 @@ function checkFirstName(employee) {
 }
 
 /**
-function to check if last name is valid
+function to check if last name is valid.
+If function returns true, last name is valid else,
+Last name is invalid
 */
 function checkLastName(employee) {
+  //if employee does not have last name or if last name is not a string or if
+  //first character of last name is not an alphabet, return false
   if (!employee.hasOwnProperty('last_name') || typeof employee.last_name !== 'string' || !employee.last_name.match(/^[a-z]/i)) {
     return false;
   }
@@ -100,6 +106,8 @@ function checkLastName(employee) {
 Function to check if annual salary exists and is a valid number
 */
 function checkAnnualSalary(employee) {
+  //if employee does not have annual salary or if annual salarary
+  //is not of type number, return false
   if (!employee.hasOwnProperty('annual_salary') || typeof employee.annual_salary !== 'number' || employee.annual_salary < 0) {
     return false;
   }
@@ -108,24 +116,34 @@ function checkAnnualSalary(employee) {
 
 /**
 Function to check if super rate exists and is valid
+If function returns True, super rate is valid
+If function returns false, super rate is invalid
 */
 function checkSuperRate(employee) {
+  //if employee does not have a super rate or if super rate is not a type of string, return false
   if (!employee.hasOwnProperty('super_rate') || typeof employee.super_rate !== 'string') {
     return false;
   }
+  // if super rate does not contain '%', return false
   if (employee.super_rate.indexOf('%') === -1) {
     return false;
   }
   var super_rate = employee.super_rate.replace(new RegExp('%', 'g'), "");
+  // if super contains an alphabet, return false
   if (super_rate.match(/[a-z]/i)) {
     return false;
   }
+  // if super rate is less than 0% or greater than 50%, return false
   if (super_rate < 0 || super_rate > 50) {
     return false
   }
   return true;
 }
 
+/**
+Function to check if given payment start date is valid.
+If function returns true, start date is valid. Else, start date is invalid
+*/
 function checkDateRange(employee) {
   //if payment start date does not exist or if payment start date is not of type string, return false
   if (!employee.hasOwnProperty('payment_start_date') || typeof employee.payment_start_date !== 'string') {
