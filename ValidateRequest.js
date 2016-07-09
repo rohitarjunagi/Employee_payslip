@@ -2,7 +2,6 @@
 This module is used to check for the validity of the request body object
 as well as the validity of the employee details values
 */
-
 var _ = require('lodash');
 exports = module.exports = ValidateRequest;
 
@@ -67,6 +66,11 @@ ValidateRequest.prototype.validateRequestData = function(employee_data, cb) {
       err = new Error('Incorrect Super Rate in Employee No: ' + i);
       return cb(err);
     }
+    // if request body has incorrect date range, return error
+    if (!checkDateRange(employeeData[i])) {
+      err = new Error('Incorrect Date Range in Employee No: ' + i);
+      return cb(err);
+    }
 
   }
   cb(null);
@@ -109,7 +113,7 @@ function checkSuperRate(employee) {
   if (!employee.hasOwnProperty('super_rate') || typeof employee.super_rate !== 'string') {
     return false;
   }
-  if (employee.super_rate.indexOf('%')=== -1) {
+  if (employee.super_rate.indexOf('%') === -1) {
     return false;
   }
   var super_rate = employee.super_rate.replace(new RegExp('%', 'g'), "");
@@ -120,6 +124,7 @@ function checkSuperRate(employee) {
     return false
   }
   return true;
+}
 
 function checkDateRange(employee) {
   //if payment start date does not exist or if payment start date is not of type string, return false
