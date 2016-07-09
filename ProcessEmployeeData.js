@@ -32,7 +32,7 @@ ProcessEmployeeData.prototype.processResponse = function(req, content_type, cb) 
       for (var i = 0; i < employeesData.length; i++) {
         var employee = {};
         var super_rate;
-        employee.name = employeesData[i].last_name + ' ' + employeesData[i].first_name;
+        employee.name = employeesData[i].first_name + ' ' + employeesData[i].last_name;
         employee.pay_period = employeesData[i].payment_start_date;
         employee.gross_income = (employeesData[i].annual_salary / 12).toFixed(0);
         employee.income_tax = computeIncomeTax(employeesData[i].annual_salary);
