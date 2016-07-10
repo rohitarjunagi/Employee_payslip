@@ -24,11 +24,15 @@ app.get('/', function(request, response) {
 
 app.post('/postEmployeeData', postEmployeeData());
 
-//define the errorHandler
+//define the error handlers
 app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(400).send('Invalid Json Format');
-  next();
+  if (err.status === 400) {
+    res.status(400).send({
+      "error": "Could not decode request: JSON parsing failed"
+    });
+  } else {
+    res.status(err.status || 500).send(err.message);
+  }
 });
 /**
 Function to take in the posted data and send back data to client
