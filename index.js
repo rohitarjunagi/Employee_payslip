@@ -42,6 +42,7 @@ function postEmployeeData() {
           if (err) {
             return res.status(400).send(err.message);
           }
+          res.header("Content-Type", "application/json");
           res.status(201).send(response);
         });
   }
