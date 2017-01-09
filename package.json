@@ -11,12 +11,16 @@
     "test": "mocha"
   },
   "dependencies": {
+    "body-parser": "~1.15.2",
+    "chai": "~3.5.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
     "ejs": "2.4.1",
     "express": "4.13.3",
-    "body-parser": "~1.15.2",
+    "express-session": "^1.14.2",
     "lodash": "~4.13.1",
     "mocha": "~2.5.3",
-    "chai": "~3.5.0",
+    "mongoose": "^4.7.6",
     "travis": "~0.1.1"
   },
   "repository": {
