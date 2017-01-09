@@ -16,7 +16,6 @@ This function checks if the employee data has sane values.
 ValidateRequest.prototype.validateRequestData = function(employee_data, cb) {
   var employeeData = employee_data;
     var err;
-    console.log('inside validate request?????');
     //if request body has incorrect last name, return error
     if (!checkFirstName(employeeData)) {
       err = new Error('Incorrect First Name');

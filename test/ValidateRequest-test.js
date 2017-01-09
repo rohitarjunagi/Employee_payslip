@@ -13,7 +13,6 @@ describe('Test the ValidateRequest library', function() {
         "super_rate": "10%"
       };
       validateEmployees.validateRequestData(request, function(err) {
-        console.log(err);
         if (err) return done(err);
         done();
       });

@@ -61,17 +61,14 @@ in the requested format
 */
 function postEmployeeData() {
   return function(req, res, next) {
-    console.log('what is request body???????   '+util.inspect(req.body));
         processEmployeePostData.processResponse(req.body, function(err, response) {
           if (err) {
-            console.log('what is message????'+err.message);
             req.flash('message', err.message);
             return res.render('pages/Payslip',{
               message: req.flash('message')
             });
             //return res.status(400).send(err.message);
           }
-          console.log('what is response????????   '+util.inspect(response));
           req.session.employeeData = response;
           res.render('pages/Payslip',{
               data : response,
@@ -84,7 +81,6 @@ function postEmployeeData() {
 function storePayData() {
   return function(req, res, next) {
     var payData = req.session.employeeData;
-    console.log('what is payslip data??????????   '+util.inspect(payData));
     Payslip.find({name : payData.name}, function(err, doc) {
       if(err) {
         req.flash('message', 'Mongo DB Error');
