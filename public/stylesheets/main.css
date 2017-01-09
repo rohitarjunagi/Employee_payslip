@@ -1,27 +1,91 @@
-.jumbotron {
-  background: #532F8C;
-  color: white;
-  padding-bottom: 80px; }
-  .jumbotron .btn-primary {
-    background: #845ac7;
-    border-color: #845ac7; }
-    .jumbotron .btn-primary:hover {
-      background: #7646c1; }
-  .jumbotron p {
-    color: #d9ccee;
-    max-width: 75%;
-    margin: 1em auto 2em; }
-  .navbar + .jumbotron {
-    margin-top: -20px; }
-  .jumbotron .lang-logo {
-    display: block;
-    background: #B01302;
-    border-radius: 50%;
-    overflow: hidden;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    border: 2px solid white; }
-    .jumbotron .lang-logo img {
-      max-width: 100%; }
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+body {
+  font-size: 15px;
+  color: #333;
+}
+img {
+  max-width: 100%;
+}
+p, h3, h4, label, th, td {
+  font-family: 'Open Sans', sans-serif;
+}
+.wrapper {
+  max-width: 1000px;
+  margin: auto;
+}
+.logo h3 {
+  color: #2b2a5f;
+  margin: 0;
+}
+.red-star {
+    color: red;
+}
+.logo {
+  margin-bottom: 30px;
+}
+.horizontal-line {
+  border-bottom: 3px solid #C0C0C0;
+}
+.form {
+  width: 350px;
+  margin: auto;
+}
+.field {
+  clear: both;
+  display: block;
+  margin: auto;
+  margin-bottom: 20px;
+}
+#top-of-form h4 {
+  margin: 0;
+  width: 100%!important;
+  font-weight: 100;
+}
+.close {
+  margin-left: 10px;
+  display: inline-block;
+  float: right;
+}
 
+.top-of-form {
+  border-bottom: 1px solid #333;
+  margin-bottom: 20px!important;
+}
+.field input, .field select {
+  float: right;
+}
+.top-of-form {
+  margin: 0 10px;
+}
+.btn-default {
+  padding: 5px;
+}
+td {
+  border: 1px solid #333;
+  padding: 5px;
+}
+th {
+  border: 1px solid #333;
+}
+table {
+  width: 100%;
+  font-size: 12px;
+}
+.data {
+  float: right;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 200px;
+}
+#outer {
+    width:100%;
+    text-align: left;
+}
+.inner
+{
+    display: inline-block;
+}
