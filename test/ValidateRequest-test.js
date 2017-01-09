@@ -129,21 +129,5 @@ describe('Test the ValidateRequest library', function() {
         done();
       });
     });
-
-    it('should produce an error if payment start date is invalid', function(done) {
-      var request = {
-        "first_name": "David",
-        "last_name": "Rudd",
-        "annual_salary": "23000",
-        "super_rate": "10%"
-      };
-      validateEmployees.validateRequestData(request, function(err) {
-        if (err) {
-          assert.equal(err.message, 'Incorrect Date Range');
-          return done();
-        }
-        done();
-      });
-    });
   });
 });

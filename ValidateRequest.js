@@ -71,7 +71,7 @@ Function to check if annual salary exists and is a valid number
 function checkAnnualSalary(employee) {
   //if employee does not have annual salary or if annual salarary
   //is not of type number, return false
-  if (_.isEmpty(employee.annual_salary) || employee.annual_salary < 0) {
+  if (_.isEmpty(employee.annual_salary) || employee.annual_salary < 0 || employee.annual_salary.length == 0 || employee.annual_salary.match(/[a-z]/i)) {
     return false;
   }
   return true;

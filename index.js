@@ -64,7 +64,7 @@ function postEmployeeData() {
         processEmployeePostData.processResponse(req.body, function(err, response) {
           if (err) {
             req.flash('message', err.message);
-            return res.render('pages/Payslip',{
+            return res.render('pages/index',{
               message: req.flash('message')
             });
             //return res.status(400).send(err.message);
