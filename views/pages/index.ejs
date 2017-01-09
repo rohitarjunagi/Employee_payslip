@@ -1,65 +1,51 @@
+<!--header info-->
 <!DOCTYPE html>
 <html>
-
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Payslip Portal</title>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+</head>
 <body>
-<h1>This is a custom project forked from https://devcenter.heroku.com/getting-started-with-nodejs in order to deploy an app to heroku</h1>
-<br /> 
+<!-- wrapper div -->
+<div class="wrapper">
+<h3>Payslip Portal</h3>
 
-<p>
-To use the app, post data to the app to this url: <a href="http://employeedata-myob.herokuapp.com/postEmployeeData"></a>
-</p>
-<br/>
-
-<p>
-The Employee Data needs to be in application/json format
-</p>
-<br/>
-
-<p>
-The sample request and response data are given below:
-</p>
-<br/>
- 
-<p> <h2>Sample Request</h2>
-{
-  "employee_data" : [
-    { "first_name" : "David",
-      "last_name" : "Rudd",
-      "annual_salary" : 150000,
-      "super_rate" : "15%",
-      "payment_start_date" : "01 March – 31 March"
-    },
-    { "first_name" : "Chen",
-      "last_name" : "Ryan",
-     "annual_salary" : 300000,
-      "super_rate" : "10%",
-     "payment_start_date" : "01 March – 31 March"
-    }
-    ]
-}
-</p>
-<br />
-<p><h2> Sample Response :</h2></p>
-{"response":[{"name":"David Rudd","pay_period":"01 March – 31 March","gross_income":"12500","income_tax":"3621","net_income":8879,"super":"1875"},{"name":"Chen Ryan","pay_period":"01 March – 31 March","gross_income":"25000","income_tax":"9046","net_income":15954,"super":"2500"}]}
-
-<br /> 
-
-<p>
-If any of the fields are missing, you'll get an error
-<br /> 
-
-If the annual salary is a negative number, you'll get an error
-<br /> 
-
-If the super rate is more is negative or more than 50%, you will get an error
-<br /> 
-
-<h2>Assumptions:</h2>
-<p>One of the assumptions made in this application is that the payment start date is provided in the format : "01 March - 31 March. If the date is not provided in that particular format, application will return an error"</p>
-<br/>
-<p> Another assumption made is that first name and last name is valid as long as it has an alphabet in the beginning of the name. Currently, first name and last name is validated if it has special characters.</p>
-<br/>
-<p>Currently there is no validation for the payment start date input field</p>
-</p>
+<!--form wrapper-->
+<div class="form">
+<div class="top-of-form">
+<h4>Employee Info</h4>
+</div>
+ <% if (message.length > 0) { %>
+        <div><b><%= message %></b></div>
+        <br/>
+    <% } %>
+<div class="form">
+<form id="my-form" action="/postEmployeeData" method="post">
+<div class="field">
+<label>First Name</label>
+<span class="red-star">★</span>
+<input type="text", name="first_name", id = "first_name" placeholder = "Firstname">
+</div>
+<div class="field">
+<label>Last Name</label>
+<span class="red-star">★</span>
+<input type="text", name="last_name", id = "last_name" placeholder = "Lastname">
+</div>
+<div class="field">
+<label>Annual Salary</label>
+<span class="red-star">★</span>
+<input type="text", name="annual_salary", id = "annual_salary" placeholder = "Annualsalary">
+</div>
+<div class="field">
+<label>Super Rate</label>
+<span class="red-star">★</span>
+<input type="text", name="super_rate", id = "super_rate" placeholder = "Super Rate">
+</div>
+<div class="submit">
+<input type="submit" value="Generate Payslip" />
+</div>
+</form>
 </body>
 </html>

@@ -1,0 +1,75 @@
+<!--header info-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>MYOB Payslip Portal</title>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+</head>
+<body>
+<!-- wrapper div -->
+<div class="wrapper">
+<h3>Payslip Portal</h3>
+
+<!--form wrapper-->
+<div class="form">
+<div class="top-of-form">
+<h4>Payslip</h4>
+</div>
+ <% if (message.length > 0) { %>
+        <div><b><%= message %></b></div>
+    <% } %>
+<%if(locals.data) { %>
+<h4><%=data.name%></h4>
+<div class="form">
+<form id="my-form" action="/storePayData" method="post">
+<table>
+      <tr>
+      <th>Description</th>
+      <th>Data</th>
+      </tr>
+      <tr>
+      <td>Pay Date</td>
+      <td><%=data.pay_date%></td>
+      </tr>
+      <tr>
+      <td>Pay Frequency</td>
+      <td>Monthly</td>
+      </tr>
+      <td>Annual Income</td>
+      <td><%=data.annual_income%></td>
+      </tr>
+      <tr>
+      <td>Gross Income</td>
+      <td><%=data.gross_income%></td>
+      </tr>
+      <tr>
+      <td>Income Tax</td>
+      <td><%=data.income_tax%></td>
+      </tr>
+      <tr>
+      <td>Net Income</td>
+      <td><%=data.net_income%></td>
+      </tr>
+      <tr>
+      <td>Super</td>
+      <td><%=data.super%></td>
+      </tr>
+      <tr>
+      <td>Pay</td>
+      <td><%=data.pay%></td>
+      </tr>
+
+ </table>
+</div>
+<br/>
+<div class="submit">
+<input type="submit" value="Pay" />
+<%} else {%>
+	You have not given the right parameters. Please try again.
+<%}%>
+</div>
+</form>
+</body>
+</html>
