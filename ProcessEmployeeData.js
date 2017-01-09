@@ -17,36 +17,43 @@ function ProcessEmployeeData() {
 This function takes the request object as input and validates the
 request object before computing the payslip
 */
-ProcessEmployeeData.prototype.processResponse = function(req, content_type, cb) {
-  var validateEmployees = new validateRequest();
-  validateEmployees.validateRequestBody(req, content_type, function(err) {
-    if (err) {
-      return cb(err);
-    }
-    validateEmployees.validateRequestData(req.employee_data, function(err) {
+ProcessEmployeeData.prototype.processResponse = function(requestData, cb) {
+    var employee_data = {};
+    employee_data.first_name = requestData.first_name;
+    employee_data.last_name = requestData.last_name;
+    employee_data.annual_salary = requestData.annual_salary;
+    employee_data.super_rate = requestData.super_rate;
+
+    validateEmployees.validateRequestData(employee_data, function(err) {
       if (err) {
         return cb(err);
       }
-      var return_data_array = [];
-      var return_data = {};
-      var employeesData = req.employee_data;
-      for (var i = 0; i < employeesData.length; i++) {
+      var employeesData = requestData;
         var employee = {};
         var super_rate;
-        employee.name = employeesData[i].first_name + ' ' + employeesData[i].last_name;
-        employee.pay_period = employeesData[i].payment_start_date;
-        employee.gross_income = (employeesData[i].annual_salary / 12).toFixed(0);
-        employee.income_tax = computeIncomeTax(employeesData[i].annual_salary);
+        employee.name = employeesData.first_name + ' ' + employeesData.last_name;
+        employee.pay_period = employeesData.payment_start_date;
+        employee.gross_income = (employeesData.annual_salary / 12).toFixed(0);
+        employee.income_tax = computeIncomeTax(employeesData.annual_salary);
         employee.net_income = employee.gross_income - employee.income_tax;
-        super_rate = computeSuper(employee.gross_income, employeesData[i].super_rate);
+        super_rate = computeSuper(employee.gross_income, employeesData.super_rate);
         employee.super = super_rate;
-        return_data_array.push(employee);
-      }
-      return_data.response = return_data_array;
-      cb(null, return_data);
-
+        employee.pay = employee.net_income - super_rate;
+        employee.annual_income = requestData.annual_salary;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10){
+          dd='0'+dd;
+        } 
+        if(mm<10){
+          mm='0'+mm;
+        } 
+        var today = dd+'/'+mm+'/'+yyyy;
+        employee.pay_date = today;
+        cb(null, employee);
     });
-  });
 }
 
 /**
