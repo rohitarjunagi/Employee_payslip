@@ -5,6 +5,7 @@ payslip and return the payslip in the requested format
 */
 var util = require('util');
 var validateRequest = require('./ValidateRequest');
+var validateEmployees = new validateRequest();
 
 exports = module.exports = ProcessEmployeeData;
 //Empty constructor
