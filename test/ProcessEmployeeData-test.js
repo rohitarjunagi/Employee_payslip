@@ -15,7 +15,7 @@ describe('Test the ProcessEmployeeData library', function() {
       };
       processEmployeePostData.processResponse(request, function(err, data) {
         if (err) return done(err);
-        assert.equal(data.name, "David Rudd");
+        assert.equal(data.name, "david rudd");
         assert.equal(data.gross_income, "1950");
         assert.equal(data.income_tax, "82");
         assert.equal(data.net_income, "1868");
@@ -35,7 +35,7 @@ describe('Test the ProcessEmployeeData library', function() {
       };
       processEmployeePostData.processResponse(request, function(err, data) {
         if (err) return done(err);
-        assert.equal(data.name, "Chris Hadfield");
+        assert.equal(data.name, "chris hadfield");
         assert.equal(data.gross_income, "7083");
         assert.equal(data.income_tax, "1616");
         assert.equal(data.net_income, "5467");

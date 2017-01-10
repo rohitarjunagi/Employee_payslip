@@ -81,6 +81,7 @@ function postEmployeeData() {
 function storePayData() {
   return function(req, res, next) {
     var payData = req.session.employeeData;
+    payData.name = payData.name.toLowerCase();
     Payslip.find({name : payData.name}, function(err, doc) {
       if(err) {
         req.flash('message', 'Mongo DB Error');
