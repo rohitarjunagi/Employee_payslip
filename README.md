@@ -27,8 +27,8 @@ To use the app, post data to the app on this url: (http://localhost:5000/postEmp
 
 
 
-- The Employee Data needs to be in application/json format
-- The Data Should have the following fields
+- The Employee data needs to be in application/json format
+- The Data should have the following fields
 ```json
 {
   "employee_data" : [
